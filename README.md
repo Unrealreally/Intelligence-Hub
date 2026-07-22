@@ -87,11 +87,12 @@ Allows users to explore repositories with:
 
 # Project Structure
 
-```
 INTELLIGENCE-HUB/
 
 ├── modules/
+│   ├── __init__.py
 │   ├── github.py
+│   ├── graphql.py
 │   ├── collector.py
 │   ├── fast_collector.py
 │   └── analysis.py
@@ -110,23 +111,24 @@ INTELLIGENCE-HUB/
 ├── config.py
 ├── main.py
 ├── requirements.txt
+├── LICENSE
 └── README.md
-```
 
 ---
+
 
 # Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/intelligence-hub.git
+git clone https://github.com/Unrealreally/Intelligence-Hub.git
 ```
 
 Move into the project directory:
 
 ```bash
-cd intelligence-hub
+cd Intelligence-Hub
 ```
 
 Create a virtual environment:
