@@ -4004,3 +4004,805 @@ box-shadow:
     color:var(--text-hi);
 }
 
+
+/* =====================================================
+   MOBILE OPTIMIZATION FINAL
+   Intelligence Hub
+===================================================== */
+
+@media (max-width:768px){
+
+body{
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+.container,
+.dashboard{
+    padding:12px;
+}
+
+
+section{
+    margin-bottom:24px;
+}
+
+
+h1{
+    font-size:30px;
+    line-height:1.15;
+}
+
+
+h2{
+    font-size:20px;
+}
+
+
+h3{
+    font-size:14px;
+}
+
+
+p{
+    font-size:12px;
+    line-height:1.45;
+}
+
+
+
+
+
+/* =========================
+   NAV
+========================= */
+
+.navbar{
+    padding:12px;
+}
+
+
+.navbar h2{
+    font-size:18px;
+}
+
+
+.nav-meta{
+
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+
+}
+
+
+.nav-meta a,
+.nav-meta button,
+.nav-btn{
+
+    font-size:10px;
+    padding:7px 10px;
+
+}
+
+
+
+
+
+/* =========================
+   INDEX HERO
+========================= */
+
+.hero{
+    padding:15px 5px;
+}
+
+
+.hero h1{
+    font-size:34px;
+}
+
+
+.hero p{
+    font-size:13px;
+}
+
+
+
+.hero-stats{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.hero-stats .item{
+
+    padding:12px;
+
+}
+
+
+.hero-stats .item:last-child{
+
+    grid-column:1/-1;
+    width:70%;
+    justify-self:center;
+
+}
+
+
+.hero-stats .num{
+
+    font-size:20px;
+
+}
+
+
+.hero-stats .lbl{
+
+    font-size:10px;
+
+}
+
+
+
+
+
+/* =========================
+   WORKFLOW
+========================= */
+
+.workflow-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.workflow-card{
+
+    padding:12px;
+
+}
+
+
+.workflow-card:last-child{
+
+    grid-column:1/-1;
+    width:70%;
+    justify-self:center;
+
+}
+
+
+.workflow-card h3{
+
+    font-size:13px;
+
+}
+
+
+.workflow-card p{
+
+    font-size:11px;
+
+}
+
+
+
+
+
+/* =========================
+   COMPARE
+========================= */
+
+
+.compare-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.compare-card{
+
+    padding:12px;
+
+}
+
+
+.compare-card h3{
+
+    font-size:14px;
+
+}
+
+
+.compare-card li{
+
+    font-size:10px;
+
+}
+
+
+
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.feature-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.feature-item{
+
+    padding:12px;
+
+}
+
+
+.feature-item h4{
+
+    font-size:13px;
+
+}
+
+
+.feature-item p{
+
+    font-size:10px;
+
+}
+
+
+
+
+
+/* =========================
+   PROFILE HERO
+========================= */
+
+
+.hero-card{
+
+    padding:15px;
+
+}
+
+
+.identity{
+
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+
+}
+
+
+.avatar{
+
+    width:65px;
+    height:65px;
+
+}
+
+
+.identity h1{
+
+    font-size:28px;
+
+}
+
+
+.identity p{
+
+    font-size:12px;
+
+}
+
+
+.tag-row{
+
+    justify-content:center;
+    flex-wrap:wrap;
+
+}
+
+
+.pill{
+
+    font-size:9px;
+
+}
+
+
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+.actions{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+
+}
+
+
+.actions a,
+.btn-ghost,
+button{
+
+    font-size:10px;
+    padding:8px 10px;
+
+}
+
+
+
+
+
+/* =========================
+   GITHUB SNAPSHOT
+========================= */
+
+
+.snapshot-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.snapshot-card{
+
+    padding:12px;
+    min-height:95px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+.snapshot-card .orb{
+
+    display:none;
+
+}
+
+
+.snapshot-label{
+
+    font-size:10px;
+
+}
+
+
+.snapshot-card .val{
+
+    font-size:24px;
+
+}
+
+
+
+
+
+/* =========================
+   SCORE
+========================= */
+
+
+.score-ring{
+
+    width:180px;
+    height:180px;
+
+}
+
+
+.rank-panel{
+
+    padding:14px;
+
+}
+
+
+
+
+
+/* =========================
+   DIMENSIONS
+========================= */
+
+
+.dimension-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.dimension-card{
+
+    padding:12px;
+
+}
+
+
+.dimension-score{
+
+    font-size:25px;
+
+}
+
+
+
+
+
+/* =========================
+   SIGNALS
+========================= */
+
+
+.signal-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.signal-card{
+
+    padding:12px;
+
+}
+
+
+.signal-head span{
+
+    font-size:10px;
+
+}
+
+
+.signal-head strong{
+
+    font-size:20px;
+
+}
+
+
+.signal-info p{
+
+    font-size:10px;
+
+}
+
+
+.score-scale{
+
+    font-size:8px;
+
+}
+
+
+
+
+
+/* =========================
+   DEVELOPER BLUEPRINT
+========================= */
+
+
+.dna-visual{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+
+}
+
+
+.dna-radar{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+
+}
+
+
+.dna-radar svg{
+
+    width:230px;
+    height:230px;
+
+}
+
+
+.dna-info{
+
+    width:100%;
+    text-align:center;
+
+}
+
+
+.dna-info h4{
+
+    font-size:10px;
+
+}
+
+
+.archetype{
+
+    font-size:24px;
+
+}
+
+
+.dna-info p{
+
+    font-size:11px;
+    max-width:280px;
+    margin:auto;
+
+}
+
+
+
+.traits{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    width:100%;
+
+}
+
+
+.trait{
+
+    min-height:65px;
+    padding:10px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    font-size:10px;
+
+}
+
+
+.trait strong{
+
+    font-size:17px;
+
+}
+
+
+
+
+
+/* =========================
+   PROFILE REVIEW
+========================= */
+
+
+.insight-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.insight-box{
+
+    padding:12px;
+
+}
+
+
+.insight-box h4{
+
+    font-size:12px;
+
+}
+
+
+.insight-box p{
+
+    font-size:10px;
+
+}
+
+
+.insight-box.stack{
+
+    grid-column:1/-1;
+    width:70%;
+    justify-self:center;
+
+}
+
+
+
+
+
+/* =========================
+   REPOSITORY ANALYTICS
+========================= */
+
+
+.stats-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    align-items:start;
+
+}
+
+
+.stat-card{
+
+    padding:12px 8px;
+
+    min-height:130px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+.stat-card h3{
+
+    font-size:9px;
+    line-height:1.2;
+    margin:0 0 6px;
+
+}
+
+
+.stat-card p{
+
+    font-size:22px;
+    line-height:1;
+    margin:4px 0 8px;
+
+}
+
+
+.delta{
+
+    font-size:8px;
+    line-height:1.25;
+    max-width:90%;
+    text-align:center;
+
+    white-space:normal;
+
+
+    }
+
+}
+
+
+.stat-more{
+
+    font-size:8px;
+    line-height:1.3;
+
+}
+
+
+
+
+
+/* =========================
+   PROJECTS
+========================= */
+
+
+.project-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+
+}
+
+
+.project-card{
+
+    padding:12px;
+
+}
+
+
+.project-card h3{
+
+    font-size:13px;
+
+}
+
+
+.project-card p{
+
+    font-size:10px;
+
+}
+
+
+
+
+
+/* =========================
+   EXPORT FOOTER
+========================= */
+
+
+.export-panel{
+
+    padding:15px;
+
+}
+
+
+footer p{
+
+    font-size:10px;
+    text-align:center;
+
+}
+
+

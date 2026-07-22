@@ -71,7 +71,7 @@
 
 function initSignalBars(){
 
-    const bars = document.querySelectorAll(".signal-fill");
+  const bars = document.querySelectorAll(".signal-fill");
 
     if(!bars.length) return;
 
@@ -221,7 +221,7 @@ function initSignalBars(){
                 y="${y.toFixed(1)}"
                 text-anchor="${anchor}"
                 dominant-baseline="middle">
-                ${labels[i]}
+                ${labels[i] || ""}
             </text>
             `;
 
@@ -435,7 +435,7 @@ function initSignalBars(){
 
 function initStatCards(){
 
-    const cards = document.querySelectorAll(".stat-card");
+ const cards = document.querySelectorAll(".stat-card");
 
     if(!cards.length) return;
 
@@ -469,7 +469,7 @@ function initStatCards(){
 
 function initSnapshotCards(){
 
-    const cards = document.querySelectorAll(".snapshot-card");
+  const cards = document.querySelectorAll(".snapshot-card");
 
     if(!cards.length) return;
 
@@ -506,8 +506,35 @@ function initSnapshotCards(){
 
 
 
+     /* ---------- Reset form after browser back ---------- */
+
+  
+     window.addEventListener("pageshow", function(){
+
+    const buttons = document.querySelectorAll(
+      'form.search-form button[type="submit"], form.deep-form button[type="submit"]'
+    );
+
+    buttons.forEach(btn => {
+
+      btn.classList.remove("loading");
+
+      if(btn.dataset.original){
+        btn.textContent = btn.dataset.original;
+      }
+      else{
+        btn.textContent = "Analyze";
+      }
+
+    });
+
+});
+
+
   /* ---------- Boot ---------- */
+
   document.addEventListener('DOMContentLoaded', () => {
+
     initNavigationButtons();
     initCounters();
     initBars();
@@ -522,5 +549,8 @@ function initSnapshotCards(){
     initReveal();
     initStatCards();
     initSnapshotCards();
+
   });
+
+
 })();

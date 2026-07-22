@@ -847,77 +847,83 @@ def calculate_craft(data):
 def star_impact_score(repos):
 
     total_stars = sum(
-        repo.get("stars", 0)
+        repo.get("stars",0)
         for repo in repos
     )
 
 
-    if total_stars >= 50:
+    if total_stars >= 10000:
+        return 30
+
+    elif total_stars >= 1000:
         return 25
 
-    elif total_stars >= 20:
+    elif total_stars >= 100:
         return 20
 
-    elif total_stars >= 10:
+    elif total_stars >= 25:
         return 15
 
     elif total_stars >= 5:
-        return 10
+        return 8
 
     elif total_stars >= 1:
-        return 5
+        return 3
 
 
     return 0
-
 
 
 def fork_impact_score(repos):
 
     total_forks = sum(
-        repo.get("forks", 0)
+        repo.get("forks",0)
         for repo in repos
     )
 
 
-    if total_forks >= 15:
+    if total_forks >= 1000:
+        return 30
+
+    elif total_forks >= 100:
         return 25
 
-    elif total_forks >= 10:
+    elif total_forks >= 25:
         return 20
 
-    elif total_forks >= 5:
-        return 15
+    elif total_forks >= 10:
+        return 12
 
-    elif total_forks >= 1:
-        return 10
+    elif total_forks >= 3:
+        return 6
 
 
     return 0
 
 
-
 def follower_presence_score(user):
 
     followers = (
-        user.get("followers", {})
-        .get("totalCount", 0)
-        if isinstance(user.get("followers"), dict)
-        else user.get("followers", 0)
+        user.get("followers",0)
+        if not isinstance(user.get("followers"),dict)
+        else user.get("followers",{}).get("totalCount",0)
     )
 
 
-    if followers >= 100:
+    if followers >= 10000:
+        return 25
+
+    elif followers >= 1000:
         return 20
 
-    elif followers >= 20:
+    elif followers >= 100:
         return 15
 
-    elif followers >= 5:
-        return 10
+    elif followers >= 25:
+        return 8
 
-    elif followers >= 1:
-        return 5
+    elif followers >= 5:
+        return 3
 
 
     return 0
@@ -1023,6 +1029,8 @@ def calculate_influence(data):
 
         "total": total
     }
+
+
 # =====================================================
 # INSIGHT SCORE
 # Measures developer identity and technical direction
