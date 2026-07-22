@@ -1,0 +1,206 @@
+"<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.username }} · Repositories | Intelligence Hub</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2>Intelligence Hub</h2>
+    <div class="nav-meta">
+        <a href="/profile/{{ profile.username }}" style="color:var(--text-mid);text-decoration:none;">← Back to Profile</a>
+        <span><span class="dot"></span>REPO WORKSPACE</span>
+    </div>
+</nav>
+
+
+<main class="dashboard">
+
+    <!-- COMMAND BAR -->
+    <div class="cmd-bar" data-reveal>
+        <div class="path">/ profile / <span>{{ profile.username }}</span> / repositories</div>
+        <div class="status">
+            <span class="live">LIVE</span>
+            <span>MATCHED · <strong id="repo-count" style="color:var(--purple-2);letter-spacing:-0.01em;text-transform:none;">{{ profile.repos|length }} / {{ profile.repos|length }}</strong></span>
+        </div>
+    </div>
+
+
+    <!-- HERO STRIP -->
+    <section class="hero-card" data-reveal>
+        <div class="identity">
+
+            <div class="avatar">
+
+                {% if profile.user.avatar_url %}
+
+                <img
+                    src="{{ profile.user.avatar_url }}"
+                    alt="{{ profile.username }}"
+                 >
+
+                {% else %}
+
+                {{ profile.username[0]|upper }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="info">
+                <div class="tag-row">
+                    <span class="pill">@{{ profile.username }}</span>
+                    <span class="pill">◫ Repository Workspace</span>
+                </div>
+                <h1>Repositories</h1>
+                <p>All public repositories tracked for <strong style="color:var(--text-hi);">{{ profile.username }}</strong> — search, filter and sort across languages, activity and impact.</p>
+            </div>
+            <div class="actions">
+                <a class="btn-ghost" href="https://github.com/{{ profile.username }}?tab=repositories" target="_blank" rel="noopener">↗ Open on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLBAR -->
+    <section class="section" data-reveal>
+        <h2>Explore Repositories</h2>
+
+        <div class="repo-toolbar">
+            <div class="repo-search">
+                <input id="repo-search" type="text" placeholder="Search by name, description, or topic…" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="select-wrap">
+                <select id="repo-lang" aria-label="Filter by language">
+                    <option value="">All Languages</option>
+                    {% for lang in profile.languages %}
+                    <option value="{{ lang[0] }}">{{ lang[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-wrap">
+                <select id="repo-sort" aria-label="Sort by">
+                    <option value="stars">Sort · Stars</option>
+                    <option value="forks">Sort · Forks</option>
+                    <option value="updated">Sort · Recently updated</option>
+                    <option value="name">Sort · Name</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="repo-tabs">
+            <button class="tab active" data-filter="all">All</button>
+            <button class="tab" data-filter="source">Original</button>
+            <button class="tab" data-filter="fork">Forks</button>
+        </div>
+
+
+        <div class="repo-list" id="repo-list">
+            {% for repo in profile.repos %}
+            <div class="repo-card"
+                 data-name="{{ repo.name }}"
+                 data-desc="{{ repo.description or '' }}"
+                 data-lang="{{ repo.language or '' }}"
+                 data-stars="{{ repo.stars or 0 }}"
+                 data-forks="{{ repo.forks or 0 }}"
+                 data-updated="{{ repo.updated_at or '' }}"
+                 data-fork="{% if repo.fork %}1{% else %}0{% endif %}"
+                 data-topics="{{ (repo.topics or [])|join(' ') }}">
+                <div class="top">
+                    
+                    <h3 class="repo-title">
+
+                        <span class="repo-icon">📁</span>
+                        
+                        {% if repo.url %}
+                            <a href="{{ repo.url }}" target="_blank" rel="noopener">
+                                {{ repo.name }}
+                            </a>
+                        {% else %}
+                            {{ repo.name }}
+                        {% endif %}
+
+                    </h3>
+
+
+                    <div class="badges">
+                        {% if repo.fork %}<span class="badge-mini fork">Fork</span>{% endif %}
+                        {% if repo.has_readme or repo.readme %}<span class="badge-mini readme">Docs</span>{% endif %}
+                    </div>
+                </div>
+
+                <p>{{ repo.description or "No description available." }}</p>
+
+                {% if repo.topics %}
+                <div class="topics">
+                    {% for topic in repo.topics[:6] %}
+                    <span class="topic">#{{ topic }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="meta">
+                    <div class="stats">
+                        {% if repo.language %}<span class="lang" data-lang="{{ repo.language }}" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;padding:3px 9px;border-radius:100px;background:rgba(139,92,246,0.1);border:1px solid var(--stroke);color:var(--purple-2);">{{ repo.language }}</span>{% endif %}
+                        <span class="stat-pill">
+                        ⭐ {{ repo.stars or 0 }}
+                        </span>
+
+                        <span class="stat-pill">
+                        ⑂ {{ repo.forks or 0 }}
+                        </span>
+
+                    </div>
+
+                    <span class="updated">
+
+                    🕒
+
+                    {% if repo.updated_at %}
+                    Updated {{ repo.updated_at[:10] }}
+                    {% else %}
+                    Unknown
+                    {% endif %}
+
+                    </span>
+
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="repo-empty" id="repo-empty">
+
+        <div class="empty-icon">
+        📂
+        </div>
+
+        <h3>
+        Nothing Found
+        </h3>
+
+        <p>
+        Try another search or remove filters.
+        </p>
+
+</div>
+
+
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>Intelligence Hub · Repository Workspace</p>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>

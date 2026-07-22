@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Intelligence Hub — Developer Intelligence OS</title>
+
+    <meta name="description"
+        content="Turn your GitHub profile into a Developer DNA and engineering intelligence report.">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        Intelligence Hub
+    </div>
+
+
+    <div class="nav-meta">
+
+        <span>
+            <span class="dot"></span>
+            SYSTEM ONLINE
+        </span>
+
+
+        <span>
+            v1.0 · ANALYTICS
+        </span>
+
+    </div>
+
+</nav>
+
+
+
+<main class="container">
+
+
+
+<section class="hero" data-reveal>
+
+
+    <span class="eyebrow">
+        <span class="pulse"></span>
+        DEVELOPER INTELLIGENCE OS
+    </span>
+
+
+
+    <h1>
+        Discover Your<br>
+        <span class="grad">
+            Developer DNA
+        </span>
+    </h1>
+
+
+
+    <p>
+        Analyze your GitHub profile to uncover engineering patterns,
+        Developer DNA, project intelligence, and growth insights—all in one report.
+    </p>
+
+
+
+    <div class="hero-stats">
+
+        <div class="item">
+
+            <div class="num">
+                <em>Github</em>
+
+            </div>
+
+            <div class="lbl">
+                Data Source
+            </div>
+
+        </div>
+
+        <div class="item">
+
+            <div class="num">
+                <em>6</em>
+
+            </div>
+
+            <div class="lbl">
+                Engineering Dimensions
+            </div>
+
+        </div>
+
+
+
+        <div class="item">
+
+            <div class="num">
+                <em>AI</em>
+            </div>
+
+            <div class="lbl">
+                Future Intelligence Layer
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+<form class="search-form"
+      action="/analyze"
+      method="POST"
+      data-reveal>
+
+
+<h3>
+    Start  your analysis
+</h3>
+
+
+
+<div class="search-row">
+
+
+<input
+    id="username"
+    type="text"
+    name="username"
+    placeholder="e.g. torvalds"
+    autocomplete="off"
+    spellcheck="false"
+    value="{{ search_query if search_query else '' }}"
+    required
+>
+
+
+
+<button type="submit">
+    Generate Report →
+</button>
+
+
+</div>
+
+
+
+<div class="search-hint">
+
+    Analyze any public GitHub profile and generate an engineering intelligence report.
+
+</div>
+
+
+
+{% if error %}
+
+<p class="error-message">
+    {{ error }}
+</p>
+
+{% endif %}
+
+
+
+</form>
+
+
+
+
+<section class="workflow">
+
+
+<div class="section-header">
+
+<h2>
+How Intelligence Hub Works
+</h2>
+
+</div>
+
+
+
+<div class="workflow-grid">
+
+
+<div class="workflow-card">
+
+<div class="ico">
+◎
+</div>
+
+
+<h3>
+GitHub Mapping
+</h3>
+
+
+<p>
+Collect repositories, languages,
+stars, forks and development patterns.
+</p>
+
+
+</div>
+
+
+
+<div class="workflow-card">
+
+<div class="ico">
+◈
+</div>
+
+
+<h3>
+Engineering Analysis
+</h3>
+
+
+<p>
+Evaluate project quality,
+activity and technical behavior.
+</p>
+
+
+</div>
+
+
+
+<div class="workflow-card">
+
+<div class="ico">
+◉
+</div>
+
+
+<h3>
+Developer DNA
+</h3>
+
+
+<p>
+Generate a unique engineering profile
+based on public signals.
+</p>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+<section class="compare">
+
+
+<h2>
+Fast Profile
+<span style="color:var(--text-lo);font-weight:300">
+vs
+</span>
+Developer DNA
+</h2>
+
+
+<p class="sub">
+Two layers of insight — instant snapshot or deep behavioral profile.
+</p>
+
+
+
+
+<div class="compare-grid">
+
+
+
+<div class="compare-card" data-reveal>
+
+
+<span class="badge">
+TIER 01 · INSTANT
+</span>
+
+
+<h3>
+Fast Profile
+</h3>
+
+
+<ul>
+
+<li>Repository Overview</li>
+<li>Languages</li>
+<li>Popular Projects</li>
+<li>Activity Snapshot</li>
+<li>Instant Results</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<div class="compare-card" data-reveal>
+
+
+<span class="badge">
+TIER 02 · DEEP ANALYSIS
+</span>
+
+
+<h3>
+Developer DNA
+</h3>
+
+
+<ul>
+
+<li>Momentum</li>
+<li>Discipline</li>
+<li>Craft</li>
+<li>Influence</li>
+<li>Insight</li>
+<li>Resolve</li>
+<li>Personalized Analysis</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="features">
+
+
+<h2>
+Six Engineering Dimensions
+</h2>
+
+
+<p class="feature-subtitle">
+
+Every GitHub profile is evaluated across six independent dimensions
+to understand how a developer builds software.
+
+</p>
+
+
+
+
+
+<div class="feature-grid">
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+01 · MOMENTUM
+</div>
+
+<h4>
+Momentum
+</h4>
+
+<p>
+Consistency and activity over time.
+</p>
+
+<div class="bar" data-progress="82"></div>
+
+</div>
+
+
+
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+02 · DISCIPLINE
+</div>
+
+<h4>
+Discipline
+</h4>
+
+<p>
+Maintenance and development habits.
+</p>
+
+<div class="bar" data-progress="74"></div>
+
+</div>
+
+
+
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+03 · CRAFT
+</div>
+
+<h4>
+Craft
+</h4>
+
+<p>
+Project quality and engineering practice.
+</p>
+
+<div class="bar" data-progress="88"></div>
+
+</div>
+
+
+
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+04 · INFLUENCE
+</div>
+
+<h4>
+Influence
+</h4>
+
+<p>
+Visibility and community impact.
+</p>
+
+<div class="bar" data-progress="66"></div>
+
+</div>
+
+
+
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+05 · INSIGHT
+</div>
+
+<h4>
+Insight
+</h4>
+
+<p>
+Technical direction and specialization.
+</p>
+
+<div class="bar" data-progress="79"></div>
+
+</div>
+
+
+
+
+
+<div class="feature-item" data-reveal>
+
+<div class="idx">
+06 · RESOLVE
+</div>
+
+<h4>
+Resolve
+</h4>
+
+<p>
+Completion and long-term commitment.
+</p>
+
+<div class="bar" data-progress="71"></div>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+</main>
+
+
+
+
+
+
+<section class="cta">
+
+
+<h2>
+Your GitHub already contains your engineering story.
+</h2>
+
+
+
+<a href="#username" class="cta-button">
+Analyze Your GitHub →
+</a>
+
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+<p>
+Intelligence Hub · Developer Intelligence Operating System
+
+Built with FastAPI • GitHub REST API • Jinja2 • Python
+</p>
+
+
+</footer>
+
+
+
+<script src="/static/js/main.js"></script>
+
+
+</body>
+
+</html>

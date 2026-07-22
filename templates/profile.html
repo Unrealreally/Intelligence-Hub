@@ -1,0 +1,1177 @@
+"<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.username }} | Intelligence Hub</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2>Intelligence Hub</h2>
+
+
+    <div class="nav-meta">
+
+    <button class="nav-btn" data-nav-back>
+        ← Back
+    </button>
+
+    <button class="nav-btn" data-nav-forward>
+        Forward →
+    </button>
+
+    <a href="/">
+        New Analysis
+    </a>
+
+</div>
+
+
+</nav>
+
+
+<main class="dashboard">
+
+    <!-- COMMAND BAR -->
+    <div class="cmd-bar" data-reveal>
+
+        <div class="path">
+            <a href="/">Home</a>
+            /
+            <span>Profile</span>
+            /
+            <strong>{{ profile.username }}</strong>
+        </div>
+
+
+        <div class="status">
+            <span class="live">LIVE</span>
+            <span>ANALYSIS · {% if scores %}DEEP{% else %}SNAPSHOT{% endif %}</span>
+            <span>REPOS · {{ profile.stats.repositories }}</span>
+        </div>
+
+    </div>
+
+
+    <!-- IDENTITY HERO -->
+    <section class="hero-card" data-reveal>
+        <div class="identity">
+            
+            <div class="avatar">
+                {% if profile.user.avatar_url %}
+                    <img
+                        src="{{ profile.user.avatar_url }}"
+                        alt="{{ profile.username }}"
+                    >
+                {% else %}
+                    {{ profile.username[0]|upper }}
+                {% endif %}
+            </div>
+
+            <div class="info">
+                <div class="tag-row">
+                    <span class="pill">@{{ profile.username }}</span>
+                    {% if profile.user.followers %}
+                    <span class="pill">◈ {{ profile.user.followers }} followers</span>
+                    {% endif %}
+                    <span class="pill">◎ {{ profile.stats.repositories }} repos</span>
+                </div>
+                <h1>{{ profile.username }}</h1>
+                <p>
+                    {{ profile.user.bio or
+                    "GitHub engineering analysis based on repositories, technology usage, activity patterns, and project signals." }}
+                </p>
+            </div>
+            <div class="actions">
+                <a class="btn-ghost" href="https://github.com/{{ profile.username }}" target="_blank" rel="noopener">↗ GitHub</a>
+                <a class="btn-ghost" href="/repositories/{{ profile.username }}">◫ All Repos</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- STAGE 1: SNAPSHOT -->
+    {% if not scores %}
+    <section class="main-score card" data-reveal>
+        <h2 class="snapshot-title">
+            GitHub Snapshot
+        </h2>
+        <p class="snapshot-description">
+            Fast overview of your public GitHub presence.
+        </p>
+
+        <div class="snapshot-grid">
+
+            <div class="snapshot-card">
+                <div class="orb"></div>
+
+                <h3 class="snapshot-label repo">◫ Repositories</h3>
+
+
+                <p class="val" data-counter="{{ profile.stats.repositories }}">{{ profile.stats.repositories }}</p>
+            </div>
+            <div class="snapshot-card">
+                <div class="orb"></div>
+
+                <h3 class="snapshot-label star">★ Stars</h3>
+
+                <p class="val" data-counter="{{ profile.stats.stars or 0 }}">{{ profile.stats.stars or 0 }}</p>
+            </div>
+            <div class="snapshot-card">
+                <div class="orb"></div>
+
+                <h3 class="snapshot-label follow">◈ Followers</h3>
+
+                <p class="val" data-counter="{{ profile.user.followers or 0 }}">{{ profile.user.followers or 0 }}</p>
+            </div>
+            <div class="snapshot-card">
+                <div class="orb"></div>
+                
+                <h3 class="snapshot-label lang">◎ Languages</h3>
+
+                <p class="val" data-counter="{{ profile.languages|length }}">{{ profile.languages|length }}</p>
+            </div>
+        </div>
+
+        <div class="unlock-card">
+            <span class="analysis-badge" style="margin-bottom:14px;">◈ DETAILED ANALYSIS</span>
+
+            <h3>Generate Developer Profile </h3>
+
+            <p>
+                Analyze repositories, coding patterns, technology usage, and project quality.
+            </p>
+
+
+            <form class="deep-form" action="/deep-analysis" method="POST">
+                <input type="hidden" name="username" value="{{ profile.username }}">
+                <button type="submit">Generate Deep Analysis →</button>
+            </form>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <!-- STAGE 2: DEVELOPER DNA -->
+    {% if scores %}
+
+    <div class="analysis-badge" data-reveal>◈ Developer DNA Unlocked</div>
+
+    <!-- OVERALL SCORE -->
+    <section class="main-score card" data-reveal>
+        <h2>Overall Developer Score</h2>
+        <div class="score-hero">
+            <div class="score-ring" role="img" aria-label="Overall score: {{ scores.overall_score }} out of 100">
+                <svg viewBox="0 0 200 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#a78bfa"/>
+                            <stop offset="50%" stop-color="#818cf8"/>
+                            <stop offset="100%" stop-color="#67e8f9"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="track" cx="100" cy="100" r="86" fill="none" stroke-width="12"/>
+                    <circle class="fill" cx="100" cy="100" r="86" fill="none" stroke-width="12"/>
+                </svg>
+                <div class="val">
+                    <div>
+                        <strong data-score="{{ scores.overall_score }}">0</strong>
+                        <small>/ 100 · OVERALL</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rank-panel">
+                <span
+                 class="rank">◆ Profile Rating
+                </span>
+
+                <h3>Public GitHub profile analyzed.</h3>
+                <p>
+                    Based on repository quality, development activity,
+                    documentation, and technology usage.
+                </p>
+
+                <div class="meta">
+                    <div><div>DIMENSIONS</div><strong>6 / 6</strong></div>
+                    <div><div>SIGNALS</div><strong>24+</strong></div>
+                    <div><div>DATA SOURCE</div><strong>GitHub</strong></div>
+                </div>
+                <div class="big-score">{{ scores.overall_score }}/100</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- DIMENSION CARDS -->
+    <section class="section" data-reveal>
+        <h2>
+            Developer Dimensions
+        </h2>
+
+        <div class="dimension-grid">
+            <div class="dimension-card">
+                <div class="head"><h3>◈ Momentum</h3><span class="idx">01</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.momentum.total }}">{{ scores.stats.momentum.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.momentum.total }}"></div>
+                <p>Consistency and activity over time.</p>
+            </div>
+
+            <div class="dimension-card">
+                <div class="head"><h3>◇ Discipline</h3><span class="idx">02</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.discipline.total }}">{{ scores.stats.discipline.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.discipline.total }}"></div>
+                <p>Maintenance and development habits.</p>
+            </div>
+
+            <div class="dimension-card">
+                <div class="head"><h3>◉ Craft</h3><span class="idx">03</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.craft.total }}">{{ scores.stats.craft.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.craft.total }}"></div>
+                <p>Project quality and engineering practice.</p>
+            </div>
+
+            <div class="dimension-card">
+                <div class="head"><h3>◐ Influence</h3><span class="idx">04</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.influence.total }}">{{ scores.stats.influence.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.influence.total }}"></div>
+                <p>Visibility and community impact.</p>
+            </div>
+
+            <div class="dimension-card">
+                <div class="head"><h3>◑ Insight</h3><span class="idx">05</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.insight.total }}">{{ scores.stats.insight.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.insight.total }}"></div>
+                <p>Technical direction and specialization.</p>
+            </div>
+
+            <div class="dimension-card">
+                <div class="head"><h3>◎ Resolve</h3><span class="idx">06</span></div>
+                <div class="dimension-score" data-counter="{{ scores.stats.resolve.total }}">{{ scores.stats.resolve.total }}</div>
+                <div class="bar" data-progress="{{ scores.stats.resolve.total }}"></div>
+                <p>Completion and long-term commitment.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!-- REPOSITORY SIGNALS -->
+
+<section class="section" data-reveal>
+
+    <h2>Repository Signals</h2>
+
+
+    <div class="signal-grid">
+
+
+        <!-- ACTIVITY -->
+
+        <div class="signal-card">
+
+
+            <div class="signal-head">
+
+                <span>
+                    Repository Activity
+                </span>
+
+                <strong>
+                    {{ scores.signals.activity }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="tier-pill {{ scores.signals.activity_rank|lower }}">
+                ● {{ scores.signals.activity_rank }}
+            </div>
+
+
+
+            <div class="signal-bar">
+
+                <div
+                    class="signal-fill"
+                    data-value="{{ scores.signals.activity }}">
+                </div>
+
+            </div>
+
+
+            <div class="score-scale">
+
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+
+            </div>
+
+
+
+            <div class="signal-info">
+
+                <span class="signal-label">
+                    OVERVIEW
+                </span>
+
+                <p>
+                    Measures development consistency through
+                    repository updates, maintenance patterns,
+                    and contribution activity.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- PROJECT DEPTH -->
+
+        <div class="signal-card">
+
+
+            <div class="signal-head">
+
+                <span>
+                    Project Depth
+                </span>
+
+                <strong>
+                    {{ scores.signals.project_depth }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="tier-pill {{ scores.signals.project_depth_rank|lower }}">
+                ● {{ scores.signals.project_depth_rank }}
+            </div>
+
+
+
+            <div class="signal-bar">
+
+                <div
+                    class="signal-fill"
+                    data-value="{{ scores.signals.project_depth }}">
+                </div>
+
+            </div>
+
+
+
+            <div class="score-scale">
+
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+
+            </div>
+
+
+
+            <div class="signal-info">
+
+                <span class="signal-label">
+                    OVERVIEW
+                </span>
+
+                <p>
+                    Measures project maturity through
+                    structure, organization,
+                    architecture quality, and implementation depth.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- TECHNOLOGY DOMAIN -->
+
+        <div class="signal-card">
+
+
+            <div class="signal-head">
+
+                <span>
+                    Technology Domain
+                </span>
+
+                <strong>
+                    {{ scores.signals.language_range }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="tier-pill {{ scores.signals.language_range_rank|lower }}">
+                ● {{ scores.signals.language_range_rank }}
+            </div>
+
+
+
+            <div class="signal-bar">
+
+                <div
+                    class="signal-fill"
+                    data-value="{{ scores.signals.language_range }}">
+                </div>
+
+            </div>
+
+
+
+            <div class="score-scale">
+
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+
+            </div>
+
+
+
+            <div class="signal-info">
+
+                <span class="signal-label">
+                    OVERVIEW
+                </span>
+
+                <p>
+                    Analyzes technical range through
+                    language diversity, framework usage,
+                    and technology specialization.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- DOCUMENTATION -->
+
+        <div class="signal-card">
+
+
+            <div class="signal-head">
+
+                <span>
+                    Documentation
+                </span>
+
+                <strong>
+                    {{ scores.signals.documentation }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="tier-pill {{ scores.signals.documentation_rank|lower }}">
+                ● {{ scores.signals.documentation_rank }}
+            </div>
+
+
+
+            <div class="signal-bar">
+
+                <div
+                    class="signal-fill"
+                    data-value="{{ scores.signals.documentation }}">
+                </div>
+
+            </div>
+
+
+
+            <div class="score-scale">
+
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+
+            </div>
+
+
+
+            <div class="signal-info">
+
+                <span class="signal-label">
+                    OVERVIEW
+                </span>
+
+                <p>
+                    Measures how effectively projects explain
+                    their purpose, usage, setup process,
+                    and technical decisions.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</section>
+
+
+
+
+    <!-- DNA RADAR VISUALIZATION -->
+
+<section class="section" data-reveal>
+
+    <h2>
+        Developer Blueprint
+    </h2>
+
+
+    <div class="dna-visual">
+
+
+        <div class="dna-radar">
+
+            <svg viewBox="-60 -60 500 500"
+                 aria-hidden="true"
+                 data-values="{{ scores.stats.momentum.total }},{{ scores.stats.discipline.total }},{{ scores.stats.craft.total }},{{ scores.stats.influence.total }},{{ scores.stats.insight.total }},{{ scores.stats.resolve.total }}">
+
+                <defs>
+
+                    <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
+
+                        <stop 
+                            offset="0%" 
+                            stop-color="rgba(167,139,250,0.35)"
+                        />
+
+                        <stop 
+                            offset="100%" 
+                            stop-color="rgba(99,102,241,0.15)"
+                        />
+
+                    </linearGradient>
+
+                </defs>
+
+
+                <g class="grid"></g>
+
+
+                <polygon 
+                    class="data-poly"
+                    fill="url(#radarFill)"
+                    stroke="#a78bfa"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                    points="">
+                </polygon>
+
+
+                <g class="data-dots"></g>
+
+
+                <g class="labels"></g>
+
+
+            </svg>
+
+        </div>
+
+
+
+        <div class="dna-info">
+
+
+            <h4>
+                PRIMARY TECHNOLOGY
+            </h4>
+
+
+            <div class="archetype">
+
+                {{ profile.languages[0][0] if profile.languages else "General Developer" }}
+
+            </div>
+
+
+
+            <p>
+
+                Most frequently used technology across public repositories.
+
+            </p>
+
+
+
+
+            <div class="traits">
+
+
+                <span class="trait">
+
+                    <strong>
+                        {{ profile.stats.repositories }}
+                    </strong>
+
+                    Repositories
+
+                </span>
+
+
+
+                <span class="trait">
+
+                    <strong>
+                        {{ profile.languages|length }}
+                    </strong>
+
+                    Languages
+
+                </span>
+
+
+
+                <span class="trait">
+
+                    <strong>
+                        {{ profile.stats.stars }}
+                    </strong>
+
+                    Stars
+
+                </span>
+
+
+
+                <span class="trait">
+
+                    <strong>
+                        {{ profile.user.followers }}
+                    </strong>
+
+                    Followers
+
+                </span>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- INTELLIGENCE SUMMARY -->
+
+<section class="section" data-reveal>
+
+    <h2>
+        PROFILE REVIEW
+    </h2>
+
+
+    <div class="summary-card">
+
+
+        <div class="summary-header">
+
+            <span class="ai-tag">
+                <span class="spark"></span>
+                Intelligence Summary
+            </span>
+
+
+            <span class="summary-status">
+                PUBLIC DATA
+            </span>
+
+        </div>
+
+
+
+        <p class="summary-intro">
+
+            Repository analysis based on public GitHub activity,
+            technology usage, and project patterns.
+
+        </p>
+
+
+
+        <div class="insight-grid">
+
+
+
+            <div class="insight-box strength">
+
+                <h4>
+                    ◆ Technical Strengths
+                </h4>
+
+                <p>
+
+                {% if scores.signals.language_range >= 70 %}
+
+                    Strong technology diversity across repositories.
+
+                {% elif scores.signals.documentation >= 70 %}
+
+                    Strong documentation and project clarity.
+
+                {% elif scores.signals.activity >= 70 %}
+
+                    High repository activity and maintenance.
+
+                {% else %}
+
+                    Developing engineering foundation.
+
+                {% endif %}
+
+                </p>
+
+            </div>
+
+
+
+
+
+            <div class="insight-box growth">
+
+                <h4>
+                    ◇ Growth Areas
+                </h4>
+
+                <p>
+
+                {% if scores.signals.documentation < 50 %}
+
+                    Improve README quality and project explanations.
+
+                {% elif scores.signals.project_depth < 50 %}
+
+                    Build larger projects with deeper structure.
+
+                {% elif scores.signals.activity < 50 %}
+
+                    Maintain more consistent development activity.
+
+                {% else %}
+
+                    Continue improving technical depth.
+
+                {% endif %}
+
+                </p>
+
+            </div>
+
+
+
+
+
+            <div class="insight-box stack">
+
+                <h4>
+                    ◈ Primary Technology
+                </h4>
+
+
+                <div class="stack-value">
+
+                    {{ profile.languages[0][0] if profile.languages else "Software Development" }}
+
+                </div>
+
+
+                <p>
+
+                    Used across 
+                    <strong>
+                    {{ profile.stats.repositories }}
+                    </strong>
+                    repositories.
+
+                </p>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+    {% endif %}
+
+
+    <!-- REPOSITORY ANALYTICS -->
+<section class="section" data-reveal>
+
+    <h2>Repository Analytics</h2>
+
+    <div class="stats-grid">
+
+
+        <!-- REPOSITORY BASE -->
+
+        <div class="stat-card">
+
+            <h3>◫ Repository Base</h3>
+
+            <p data-counter="{{ profile.stats.repositories }}">
+                {{ profile.stats.repositories }}
+            </p>
+
+            <div class="delta">
+                Public projects tracked
+            </div>
+
+
+            <div class="stat-more">
+
+                <span class="insight-label">
+                    PROFILE INSIGHT
+                </span>
+
+                Total repositories discovered from GitHub.
+                Shows overall project presence and development history.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ORIGINAL WORK -->
+
+        <div class="stat-card">
+
+            <h3>◇ Original Work</h3>
+
+            <p data-counter="{{ profile.stats.original_projects }}">
+                {{ profile.stats.original_projects }}
+            </p>
+
+            <div class="delta">
+                Independent creations
+            </div>
+
+
+            <div class="stat-more">
+
+                <span class="insight-label">
+                    PROFILE INSIGHT
+                </span>
+
+                Measures independent creations.
+                Excludes forked repositories from other developers.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMMUNITY REACH -->
+
+        <div class="stat-card">
+
+            <h3>★ Community Reach</h3>
+
+            <p data-counter="{{ profile.stats.stars or 0 }}">
+                {{ profile.stats.stars or 0 }}
+            </p>
+
+            <div class="delta">
+                Recognition received
+            </div>
+
+
+            <div class="stat-more">
+
+                <span class="insight-label">
+                    PROFILE INSIGHT
+                </span>
+
+                Tracks community recognition through stars.
+                Shows external interest in published work.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DEVELOPER REUSE -->
+
+        <div class="stat-card">
+
+            <h3>⑂ Developer Reuse</h3>
+
+            <p data-counter="{{ profile.stats.forks or 0 }}">
+                {{ profile.stats.forks or 0 }}
+            </p>
+
+            <div class="delta">
+                Fork activity
+            </div>
+
+
+            <div class="stat-more">
+
+                <span class="insight-label">
+                    PROFILE INSIGHT
+                </span>
+
+                Tracks reuse through forks.
+                Shows collaboration and project usefulness.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+    <!-- LANGUAGES -->
+    <section class="section card" data-reveal>
+        <h2 style="margin-bottom:6px;">Languages</h2>
+        <p style="color:var(--text-mid);font-size:13.5px;margin-bottom:16px;">Language footprint across all tracked repositories.</p>
+
+        <div class="language-list">
+            {% for lang in profile.languages %}
+            <div class="language-item" data-lang="{{ lang[0] }}" data-count="{{ lang[1] }}">
+                {{ lang[0] }}
+                <span>{{ lang[1] }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="language-bar" aria-hidden="true"></div>
+    </section>
+
+
+    <!-- FEATURED PROJECTS -->
+
+<section class="section" data-reveal>
+
+    <div class="section-header" style="margin:0 0 20px;">
+
+        <h2 style="margin:0;">
+            Featured Projects
+        </h2>
+
+
+        <a 
+            href="/repositories/{{ profile.username }}" 
+            class="btn-ghost" 
+            style="padding:8px 14px;background:rgba(20,22,40,0.6);border:1px solid var(--stroke-hi);border-radius:10px;color:var(--text-hi);font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;"
+        >
+            ◫ Explore all repos →
+        </a>
+
+    </div>
+
+
+
+    <div class="project-grid">
+
+
+        {% for repo in profile.featured_repos %}
+
+
+        <div class="project-card">
+
+
+            <div class="head">
+
+
+                <div class="project-title-area">
+
+                    <h3>
+
+                        {% if repo.url %}
+
+                        <a 
+                            href="{{ repo.url }}" 
+                            target="_blank" 
+                            rel="noopener"
+                        >
+                            {{ repo.name }}
+                        </a>
+
+                        {% else %}
+
+                            {{ repo.name }}
+
+                        {% endif %}
+
+                    </h3>
+
+
+
+                    {% if repo.project_type %}
+
+                    <span class="project-type">
+                        {{ repo.project_type }}
+                    </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                {% if repo.url %}
+
+                <a 
+                    href="{{ repo.url }}" 
+                    target="_blank" 
+                    rel="noopener" 
+                    class="ext" 
+                    title="Open on GitHub"
+                >
+                    ↗
+                </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+
+
+            <p>
+                {{ repo.description or "Repository description not provided." }}
+            </p>
+
+
+
+
+            <div class="project-info">
+
+
+                <span>
+                    ★ {{ repo.stars or 0 }}
+                </span>
+
+
+                <span>
+                    ⑂ {{ repo.forks or 0 }}
+                </span>
+
+
+
+                {% if repo.language %}
+
+                <span 
+                    class="lang" 
+                    data-lang="{{ repo.language }}"
+                >
+                    {{ repo.language }}
+                </span>
+
+                {% endif %}
+
+
+            </div>
+
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+    <!-- EXPORT PANEL -->
+    <section class="export-panel" data-reveal>
+        <div>
+            <h3>Export your intelligence report</h3>
+            <p>Generate a shareable Developer Card or download a professional engineering report.</p>
+        </div>
+        <div class="export-actions">
+
+            <button class="btn-ghost" disabled>
+                ◫ Developer Card
+                <small> Coming Soon</small>
+            </button>
+            <button class="btn-ghost primary"  disabled>
+                ↓ PDF Report
+                <small>Coming Soon</small>
+            </button>
+        
+        
+        </div>
+    </section>
+
+</main>
+
+
+<footer>
+    <p>
+        Intelligence Hub · Developer Intelligence Platform
+
+        Powered by FastAPI • GitHub REST API • Python
+    </p>
+</footer>
+
+<script src="/static/js/main.js?v=2"></script>
+</body>
+</html>
