@@ -1,43 +1,59 @@
 # Intelligence Hub
 
-A GitHub-based developer intelligence platform that analyzes developer activity and creates an evidence-based profile from real GitHub data.
+A GitHub-based developer intelligence platform that analyzes developer activity and creates an evidence-based developer profile from real GitHub data.
 
-Intelligence Hub collects repository information, programming languages, activity patterns, and contribution data to generate a developer overview with insights about coding habits and project presence.
+Intelligence Hub collects repository information, programming languages, activity patterns, and contribution data to generate insights about coding habits, project presence, and development patterns.
 
 ---
 
-## Features
+# Features
 
 ## GitHub Profile Analysis
 
-- Fetches developer information using GitHub API
-- Analyzes public repositories
-- Tracks stars, forks, languages, and repository activity
-- Collects contribution and event data
+Fetches and analyzes developer information using GitHub APIs.
+
+Includes:
+
+- Public profile information
+- Repository analysis
+- Programming language usage
+- Stars and forks
+- Repository activity
+- Contribution activity
+
+---
 
 ## Developer Snapshot
 
-Generates an overview containing:
+Generates a developer overview containing:
 
 - Repository count
 - Original projects
 - Stars received
 - Fork activity
-- Programming language usage
+- Language distribution
+- Development patterns
+
+---
 
 ## Repository Intelligence
 
-Analyzes repositories using:
+Analyzes repositories using available GitHub evidence:
 
 - Repository metadata
 - README availability
 - Documentation signals
 - Topics
-- Project details
+- Project information
+- Activity data
+
+---
 
 ## Developer DNA Analysis
 
-Creates an experimental scoring system based on GitHub activity patterns:
+Creates an experimental scoring system based on GitHub activity patterns.
+
+Dimensions:
 
 - Momentum
 - Discipline
@@ -46,7 +62,11 @@ Creates an experimental scoring system based on GitHub activity patterns:
 - Insight
 - Resolve
 
-Scores are generated from available GitHub evidence and are used for developer profile visualization.
+Scores are generated from available GitHub evidence and used for developer profile visualization.
+
+> Developer DNA is an experimental visualization system and does not represent official programming ability.
+
+---
 
 ## Repository Explorer
 
@@ -87,7 +107,8 @@ Allows users to explore repositories with:
 
 # Project Structure
 
-INTELLIGENCE-HUB/
+```text
+Intelligence-Hub/
 
 ├── modules/
 │   ├── __init__.py
@@ -113,13 +134,13 @@ INTELLIGENCE-HUB/
 ├── requirements.txt
 ├── LICENSE
 └── README.md
+```
 
 ---
 
-
 # Installation
 
-Clone the repository:
+## Clone Repository
 
 ```bash
 git clone https://github.com/Unrealreally/Intelligence-Hub.git
@@ -137,7 +158,7 @@ Create a virtual environment:
 python -m venv venv
 ```
 
-Activate the virtual environment.
+Activate the environment.
 
 Windows:
 
@@ -155,7 +176,7 @@ pip install -r requirements.txt
 
 # Environment Setup
 
-Create a `.env` file in the root directory.
+Create a `.env` file in the project root.
 
 Example:
 
@@ -164,9 +185,9 @@ GITHUB_TOKEN=your_github_token
 GITHUB_GRAPHQL_TOKEN=your_github_graphql_token
 ```
 
-The application uses GitHub API tokens to collect profile and repository data.
+Environment variables are used for GitHub API access.
 
-Keep your `.env` file private and do not upload it publicly.
+Never upload `.env` publicly.
 
 ---
 
@@ -178,7 +199,7 @@ Start the FastAPI server:
 uvicorn main:app --reload
 ```
 
-The application will run at:
+Application runs at:
 
 ```
 http://127.0.0.1:8000
@@ -198,18 +219,23 @@ The application collects:
 - Programming languages
 - Contribution activity
 
+---
+
 ## 2. Repository Analysis
 
-Repositories are processed using available repository data:
+Repositories are analyzed using:
 
 - Project information
-- README presence
+- README availability
 - Documentation signals
 - Repository activity
+- Metadata
+
+---
 
 ## 3. Developer Analysis
 
-Collected data is passed through analysis modules to generate developer insights:
+Collected data is processed to generate developer insights:
 
 - Momentum
 - Discipline
@@ -218,9 +244,11 @@ Collected data is passed through analysis modules to generate developer insights
 - Insight
 - Resolve
 
+---
+
 ## 4. Visualization
 
-The processed data is displayed through:
+Processed data is displayed through:
 
 - Developer snapshot cards
 - Repository intelligence cards
@@ -252,19 +280,20 @@ Used for:
 # Notes
 
 - Intelligence Hub analyzes publicly available GitHub information.
-- Developer DNA scores are experimental metrics based on available activity data.
-- Scores are not official measurements of programming ability.
+- Developer DNA scores are experimental metrics.
+- Results are based only on available GitHub evidence.
 
 ---
 
 # Future Improvements
 
-Possible future improvements:
+Possible improvements:
 
-- Better repository analysis
-- More detailed developer insights
-- Improved scoring methods
-- Additional visualization features
+- More advanced repository analysis
+- Improved developer scoring
+- Better AI-assisted insights
+- More visualization features
+- Additional developer metrics
 
 ---
 
